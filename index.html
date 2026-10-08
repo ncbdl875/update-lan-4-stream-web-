@@ -1483,7 +1483,7 @@ setTimeout(() => {
   </script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, get, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+  import { getDatabase, ref, get, set, push, onValue, update } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCWGSuA2uDHPk-Qeu9dUs9YzF21TbaIMdg",
@@ -1860,8 +1860,12 @@ async function saveUserDataToFirebase(addedAccs) {
 // Chạy tự động khi tải xong trang web
 document.addEventListener('DOMContentLoaded', () => {
   updateUIUserInfo();
-  updateVisitorCount();       // 👈 Thêm dòng này để chạy bộ đếm
-  listenToTodayCheerTotal();  // 👈 Thêm dòng này để đồng bộ Cheer Bomb toàn web
+  updateVisitorCount();       // 👈 Chạy bộ đếm lượt truy cập
+  listenToTodayCheerTotal();  // 👈 Đồng bộ Cheer Bomb toàn web
+
+  // Gán hàm ra phạm vi toàn cục (window) để HTML gọi được
+  window.updateUIUserInfo = updateUIUserInfo;
+  window.saveUserDataToFirebase = saveUserDataToFirebase;
 });
 
 // Hàm đếm lượt truy cập CHUẨN REALTIME
