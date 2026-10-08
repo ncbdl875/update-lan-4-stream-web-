@@ -289,11 +289,12 @@
   }
 }
 
-/* BANNER DÒNG TIN CHẠY CHỮ THỜI SỰ (NEWS TICKER) */
+/* ============================================================ */
+/* 🌟 BANNER DÒNG TIN CHẠY CHỮ NỐI ĐUÔI KHÔNG BỊ GIẬT/MẤT TIN */
+/* ============================================================ */
 .ticker-wrap {
   width: 100%;
   overflow: hidden;
-  white-space: nowrap;
   background: linear-gradient(90deg, #3a0e68, #7000f9, #3a0e68);
   border: 1.5px solid #ffd700;
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
@@ -304,15 +305,17 @@
   font-size: 12.5px;
   font-weight: 700;
   box-sizing: border-box;
+  white-space: nowrap;
 }
 
-.ticker-move, .ticker {
+.ticker {
   display: inline-block;
   white-space: nowrap;
-  animation: ticker-seamless 22s linear infinite;
+  animation: ticker-seamless 25s linear infinite;
 }
 
-.ticker-move:hover, .ticker:hover {
+/* Di chuột / Động tay vào thì tạm dừng để dễ đọc */
+.ticker-wrap:hover .ticker {
   animation-play-state: paused;
 }
 
@@ -321,7 +324,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* Trượt đúng -50% để chữ gối đầu nối đuôi vô tận */
   }
 }
 
@@ -1559,30 +1562,44 @@ if (typeof saveUserDataToFirebase === 'function') {
      }
    };
 
-   // 3. Lắng nghe Lời nhắn từ Firebase & Cập nhật lên Banner Realtime
-   function listenBannerMessages() {
-     const dayKey = typeof window.getCheerDayKey === 'function' ? window.getCheerDayKey() : new Date().toISOString().split('T')[0];
-     const msgRef = ref(db, `banner_messages/${dayKey}`);
+   // 3. Lắng nghe Lời nhắn từ Firebase & Cập nhật lên Banner Realtime (Nối đuôi vô tận & Tự điều chỉnh tốc độ)
+function listenBannerMessages() {
+  const dayKey = typeof window.getCheerDayKey === 'function' ? window.getCheerDayKey() : new Date().toISOString().split('T')[0];
+  const msgRef = ref(db, `banner_messages/${dayKey}`);
 
-     onValue(msgRef, (snapshot) => {
-       const tickerElem = document.getElementById('updateTickerContent');
-       if (!tickerElem) return;
+  onValue(msgRef, (snapshot) => {
+    const tickerElem = document.getElementById('updateTickerContent');
+    if (!tickerElem) return;
 
-       if (snapshot.exists()) {
-         const data = snapshot.val();
-         const msgList = Object.values(data);
-         
-         const tickerHtml = msgList.map(m => 
-           `💬 <span class="ticker-highlight">${m.nickname}:</span> "${m.text}"`
-         ).join(' &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; ');
+    let baseText = "";
 
-         tickerElem.innerHTML = tickerHtml + ' &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; 💛 HAPPY JIMIN DAY 🎂🐣';
-       } else {
-         tickerElem.innerHTML = `💬 <span class="ticker-highlight">NCBDL TEAM:</span> "Hãy là người đầu tiên gửi lời chúc cho ngày hôm nay! Bấm nút GỬI TIN NHẮN ở góc dưới bên phải để gửi nhé! 💜"`;
-       }
-     });
-   }
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      const msgList = Object.values(data);
+      
+      // Nối TẤT CẢ các tin nhắn đã ghi nhận từ người dùng
+      const tickerHtml = msgList.map(m => 
+        `💬 <span class="ticker-highlight">${m.nickname}:</span> "${m.text}"`
+      ).join(' &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; ');
 
+      baseText = tickerHtml + ' &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; 🚀 BẤM NÚT "GỬI LỜI NHẮN" Ở GÓC DƯỚI BÊN PHẢI ĐỂ GÓP VUI NHÉ! 💜 &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; ';
+    } else {
+      baseText = `💬 <span class="ticker-highlight">NCBDL TEAM:</span> "Hãy là người đầu tiên gửi lời nhắn/lời chúc cho ngày hôm nay! Bấm nút Phong Thư ở góc dưới bên phải để gửi nhé! 💜" &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; `;
+    }
+
+    // Nhân đôi chuỗi tin nhắn để gối đầu nối đuôi không khoảng trống
+    tickerElem.innerHTML = baseText + baseText;
+
+    // TỰ ĐỘNG TÍNH THỜI GIAN CHẠY DỰA TRÊN ĐỘ DÀI TIN NHẮN
+    requestAnimationFrame(() => {
+      const singleWidth = tickerElem.scrollWidth / 2; // Độ dài 1 lượt tin nhắn
+      const speed = 100; // Tốc độ lướt chữ (55px/s)
+      const calculatedDuration = Math.max(15, singleWidth / speed);
+      
+      tickerElem.style.animationDuration = `${calculatedDuration}s`;
+    });
+  });
+}
    listenBannerMessages();
   // 1. Hàm gửi dữ liệu lên Firebase
   async function sendDataToFirebase(amount) {
