@@ -1736,7 +1736,28 @@ function getOrCreateUserSyncCode() {
 
   return { userCode, userNick };
 }
-
+// Hàm tự động lưu mã cá nhân lên Firebase ngay khi mở trang
+async function initUserOnFirebase() {
+  const { userCode, userNick } = getOrCreateUserSyncCode();
+  const totalAccs = parseInt(localStorage.getItem('user_total_accs') || '0');
+  
+  try {
+    const userRef = ref(db, `users/${userCode}`);
+    const snapshot = await get(userRef);
+    
+    // Nếu mã này chưa có trên Firebase thì tạo mới ngay lập tức
+    if (!snapshot.exists()) {
+      await set(userRef, {
+        nickname: userNick,
+        totalAccs: totalAccs,
+        createdTime: new Date().toISOString()
+      });
+      console.log(`✅ Đã tự động khởi tạo mã ${userCode} lên Firebase!`);
+    }
+  } catch (e) {
+    console.error("Lỗi khởi tạo user trên Firebase:", e);
+  }
+}
 // Hiển thị thông tin người dùng & Tổng số acc tích lũy ra Pop-up
 function updateUIUserInfo() {
   const { userCode, userNick } = getOrCreateUserSyncCode();
@@ -1860,6 +1881,7 @@ async function saveUserDataToFirebase(addedAccs) {
 // Chạy tự động khi tải xong trang web
 document.addEventListener('DOMContentLoaded', () => {
   updateUIUserInfo();
+  initUserOnFirebase();
   updateVisitorCount();       // 👈 Chạy bộ đếm lượt truy cập
   listenToTodayCheerTotal();  // 👈 Đồng bộ Cheer Bomb toàn web
 
