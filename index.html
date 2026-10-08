@@ -27,7 +27,7 @@
       color: #ffffff;
       display: flex;
       justify-content: center;
-      padding: 30px 15px;
+      padding: 30px 15px 80px 15px; /* Thêm padding dưới để tránh bị nút nổi che */
       margin: 0;
       min-height: 100vh;
     }
@@ -39,7 +39,7 @@
       text-align: center;
     }
 
-    /* 📌 🔥 B1. THẺ BADGE NỔI BẬT TRÊN CÙNG (MỚI THÊM) */
+    /* 📌 🔥 B1. THẺ BADGE NỔI BẬT TRÊN CÙNG */
     .hot-badge {
       display: inline-block;
       background: rgba(112, 0, 249, 0.1);
@@ -61,7 +61,7 @@
       100% { transform: scale(1); }
     }
 
-    /* C. ẢNH ĐẠI DIỆN & HIỆU ỨNG BAY BỒNG BỀNH (ĐÃ BỔ SUNG ANIMATION) */
+    /* C. ẢNH ĐẠI DIỆN & HIỆU ỨNG BAY BỒNG BỀNH */
     .profile-img {
       width: 115px;
       height: 115px;
@@ -96,11 +96,11 @@
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
 
-    /* E. TIÊU ĐỀ CHÍNH & MÔ TẢ (TỐI ƯU TƯƠNG PHẢN) */
+    /* E. TIÊU ĐỀ CHÍNH & MÔ TẢ */
     h1 { 
       font-size: 25px; 
       font-weight: 900;
-      color: #4d0287b3; /* Màu tím sẫm cực nét trên nền hồng */
+      color: #4d0287b3;
       margin: 2px 0 8px 0; 
       letter-spacing: 1.5px;
       text-shadow: 0 2px 10px rgba(187, 134, 252, 0.3);
@@ -109,7 +109,7 @@
       font-size: 14px; 
       font-weight: 600;
       color: #550c5c; 
-      margin-bottom: 32px; 
+      margin-bottom: 28px; 
       line-height: 1.5;
     }
 
@@ -148,7 +148,7 @@
       align-items: center;
       justify-content: space-between;
       text-decoration: none;
-      color: #2d004d; /* Chữ tối màu dễ đọc trên kính mờ sáng */
+      color: #2d004d;
       font-weight: 700;
       font-size: 14.5px;
       cursor: pointer;
@@ -172,9 +172,11 @@
       letter-spacing: 0.5px;
       white-space: nowrap;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: transform 0.2s;
+      transition: transform 0.2s, background-color 0.2s;
+      border: none;
+      cursor: pointer;
     }
-    .link-box:hover .btn-action {
+    .btn-action:hover {
       transform: scale(1.05);
     }
 
@@ -182,6 +184,307 @@
     .btn-itunes  { background: #FA2D48; color: #fff; }
     .btn-guide   { background: #7000f9; color: #fff; }
     .btn-store   { background: #3b0764; color: #fff; }
+
+    /* 💣 ICON ARMY BOMB PNG */
+    .cheer-icon-img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+      vertical-align: middle;
+      display: inline-block;
+      filter: drop-shadow(0 2px 5px rgba(112, 0, 249, 0.4));
+      transition: transform 0.2s ease;
+    }
+
+    /* 💣 NÚT BẮN CHEER BOMB NỔI CỐ ĐỊNH (HOÀN THIỆN ICON TRÀN VIỀN 3D) */
+.floating-cheer-btn {
+  position: fixed;
+  bottom: 22px;
+  right: 20px;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #7000f9;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 50px;
+  padding: 6px 18px 6px 8px; /* Tối ưu khoảng cách trong khung */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 8px 25px rgba(112, 0, 249, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  animation: floatBounce 3s infinite ease-in-out;
+  overflow: visible; /* Cho phép icon tràn viền ra ngoài khung */
+}
+
+/* Cấu hình Icon Bomb TO và TRỒI RA NGOÀI KHUNG */
+.floating-cheer-btn img {
+  width: 100px !important;  /* Tăng kích thước icon to gấp đôi */
+  height: 100px !important;
+  margin-top: -25px;       /* Đẩy trồi tràn lên phía trên viền */
+  margin-bottom: -25px;    /* Đẩy trồi tràn xuống phía dưới viền */
+  margin-left: -15px;      /* Đẩy trồi tràn sang bên trái */
+  filter: drop-shadow(0 4px 10px rgba(112, 0, 249, 0.5));
+  transition: transform 0.25s ease;
+}
+
+.floating-cheer-btn:hover {
+  transform: scale(1.06);
+  background: #ffffff;
+}
+
+.floating-cheer-btn:hover img {
+  transform: scale(1.15) rotate(12deg); /* Lắc nhẹ icon khi di chuột vào */
+}
+    /* HIỆU ỨNG BOMB BAY LÊN KHI BẤM TAY */
+    .flying-bomb-particle {
+      position: fixed;
+      pointer-events: none;
+      width: 32px;
+      height: 32px;
+      z-index: 9999;
+      animation: floatUpAndFade 1s forwards ease-out;
+    }
+
+    @keyframes floatUpAndFade {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+      }
+      50% {
+        opacity: 0.9;
+        transform: translateY(-60px) scale(1.3) rotate(-15deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-130px) scale(1.6) rotate(20deg);
+      }
+    }
+/* Thẻ đếm số người ghé thăm ở GÓC DƯỚI BÊN TRÁI (Đối diện Cheer Bomb) */
+.visitor-badge {
+  position: fixed;
+  bottom: 22px;  /* Đặt xuống đáy màn hình (ngang hàng với Cheer Bomb) */
+  left: 20px;    /* Căn sát lề trái */
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #7000f9;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 50px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #3b0764;
+  box-shadow: 0 8px 25px rgba(112, 0, 249, 0.25);
+}
+
+/* Căn chỉnh lại trên màn hình điện thoại nhỏ */
+@media (max-width: 480px) {
+  .visitor-badge {
+    bottom: 15px;
+    left: 10px;
+    font-size: 10.5px;
+    padding: 6px 12px;
+  }
+}
+
+/* BANNER DÒNG TIN CHẠY CHỮ THỜI SỰ (NEWS TICKER) */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: linear-gradient(90deg, #3a0e68, #7000f9, #3a0e68);
+  border: 1.5px solid #ffd700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  border-radius: 25px;
+  padding: 8px 0;
+  margin: 10px 0 16px 0;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+  box-sizing: border-box;
+}
+
+.ticker-move, .ticker {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker-seamless 22s linear infinite;
+}
+
+.ticker-move:hover, .ticker:hover {
+  animation-play-state: paused;
+}
+
+@keyframes ticker-seamless {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-highlight {
+  color: #ffd700;
+  font-weight: 800;
+}
+/* ============================================================ */
+/* 🔑 3. KHUNG MÃ KHÔI PHỤC & NICKNAME TRONG POP-UP (ĐÃ TỐI ƯU DỄ ĐỌC) */
+/* ============================================================ */
+.user-sync-card {
+  background: rgba(112, 0, 249, 0.08); /* Nền tím nhạt đồng bộ với khung Pop-up */
+  border: 1.5px dashed #7000f9;          /* Viền nét đứt màu tím đậm nổi bật */
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-top: 16px;
+  text-align: left;
+  font-size: 13.5px;                    /* Tăng kích thước chữ to rõ hơn */
+  font-weight: 700;                     /* In đậm nét chữ */
+  color: #3b0764 !important;            /* Màu tím sẫm cực nét trên nền sáng */
+}
+
+/* Mã Code màu tím nổi bật */
+.sync-code-badge {
+  background: #7000f9;
+  color: #ffffff !important;
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-size: 13px;
+}
+
+/* Các Nút bấm Nổi bật */
+.btn-sync-action {
+  background: #7000f9;                  /* Nút nền tím rõ ràng */
+  border: none;
+  color: #ffffff !important;
+  border-radius: 8px;
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(112, 0, 249, 0.2);
+}
+
+.btn-sync-action:hover {
+  background: #4a0e68;
+  transform: translateY(-1px);
+}
+    /* 🎟️ KHUNG DOANH THU TOUR (2 TIER ACCORDION - THU GỌN VÀ MỞ KHI BẤM XEM) */
+    .tour-main-card {
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      text-align: left;
+    }
+
+    .tour-main-header {
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      color: #2d004d;
+      font-weight: 800;
+      font-size: 14.5px;
+      user-select: none;
+    }
+
+    .tour-main-header:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .tour-locations-wrapper {
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.15);
+      border-top: 1px dashed rgba(85, 12, 92, 0.2);
+    }
+
+    /* Sub-box cho từng vị trí show */
+    .tour-location-card {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .tour-location-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .tour-location-header {
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #5b00cc;
+      user-select: none;
+    }
+
+    .tour-location-header:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+
+    .tour-expand-icon {
+      font-size: 11px;
+      color: #7000f9;
+      transition: transform 0.2s ease;
+    }
+
+    .tour-location-card.active .tour-expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .tour-detail-content {
+      padding: 8px 14px 12px 14px;
+      background: rgba(255, 255, 255, 0.3);
+      border-top: 1px dashed rgba(85, 12, 92, 0.15);
+      font-size: 12.5px;
+    }
+
+    .tour-info-list {
+      color: #2d004d;
+      line-height: 1.6;
+    }
+
+    .tour-info-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px dashed rgba(85, 12, 92, 0.15);
+      padding: 4px 0;
+    }
+
+    .tour-info-item:last-child {
+      border-bottom: none;
+    }
+
+    .tour-label {
+      color: #550c5c;
+      font-weight: 700;
+      white-space: nowrap;
+      margin-right: 8px;
+    }
+
+    .tour-value {
+      font-weight: 800;
+      color: #2d004d;
+      text-align: right;
+    }
 
     /* 📌 I. MỤC CONTACT LIÊN HỆ TEAM Ở CUỐI TRANG */
     .contact-section {
@@ -263,7 +566,6 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    /* NÚT TẮT [X] ĐÃ ĐƯỢC CHỈNH MÀU ĐẬM NỔI BẬT */
     .close-btn {
       position: absolute;
       top: 12px; right: 18px;
@@ -278,25 +580,296 @@
       transform: scale(1.15);
     }
 
+    /* Input số lượng account cho Cheer Bomb Popup */
+    .cheer-input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1.5px solid #bb86fc;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+      font-weight: 700;
+      color: #3b0764;
+      text-align: center;
+      margin: 14px 0 18px 0;
+      box-sizing: border-box;
+      outline: none;
+    }
+    .cheer-input:focus {
+      border-color: #7000f9;
+      box-shadow: 0 0 10px rgba(112, 0, 249, 0.3);
+    }
+
+    .cheer-history-toggle {
+      font-size: 12px;
+      color: #550c5c;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .cheer-history-box {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(112, 0, 249, 0.2);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-top: 10px;
+    }
+
+    .cheer-history-header-row {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #4a0e68;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed rgba(85, 12, 92, 0.2);
+    }
+
+    .cheer-history-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 0;
+      border-bottom: 1px dashed rgba(85, 12, 92, 0.12);
+      font-size: 12px;
+    }
+    .cheer-history-item:last-child {
+      border-bottom: none;
+    }
+
     #loading { color: #550c5c; font-weight: 600; font-size: 14px; margin-top: 30px; }
+    /* Nút nổi Gửi Lời Nhắn (Xếp ngay trên nút Cheer Bomb) */
+.floating-msg-btn {
+  position: fixed;
+  bottom: 85px;
+  right: 20px;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1.5px solid #7000f9;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 50px;
+  padding: 7px 15px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #3b0764;
+  box-shadow: 0 6px 20px rgba(112, 0, 249, 0.25);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.floating-msg-btn:hover {
+  transform: scale(1.06);
+  background: #ffffff;
+}
+
+/* Căn chỉnh trên màn hình điện thoại */
+@media (max-width: 480px) {
+  .floating-msg-btn {
+    bottom: 75px;
+    right: 10px;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}
+/* GIAO DIỆN THEME SINH NHẬT JIMIN (VÀNG & TÍM PASTEL) */
+body {
+  background: linear-gradient(160deg, #fffde7 0%, #f3e8ff 55%, #fef3c7 100%) !important;
+  color: #3b0764 !important;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Avatar & Viền lấp lánh */
+.profile-avatar {
+  border: 3px solid #fde047 !important;
+  box-shadow: 0 0 18px rgba(250, 204, 21, 0.8), 0 0 30px rgba(192, 132, 252, 0.4) !important;
+  animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% { transform: scale(1); box-shadow: 0 0 12px rgba(250, 204, 21, 0.6); }
+  100% { transform: scale(1.03); box-shadow: 0 0 22px rgba(192, 132, 252, 0.7); }
+}
+
+.profile-title { color: #6b21a8 !important; }
+.category-title { color: #7e22ce !important; border-bottom: 2px solid #fde047 !important; }
+
+/* Nút Link */
+.link-box {
+  background: #ffffff !important;
+  border: 1px solid #e9d5ff !important;
+  color: #3b0764 !important;
+  box-shadow: 0 4px 12px rgba(192, 132, 252, 0.12);
+}
+.link-box:hover {
+  background: #fefce8 !important;
+  border-color: #c084fc !important;
+  box-shadow: 0 4px 18px rgba(250, 204, 21, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* POPUP WELCOME SINH NHẬT */
+.jimin-popup-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.jimin-popup-card {
+  background: linear-gradient(135deg, #fffde7 0%, #f3e8ff 100%);
+  border: 2px solid #fde047;
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+  max-width: 320px;
+  width: 85%;
+  box-shadow: 0 10px 30px rgba(192, 132, 252, 0.4);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.jimin-popup-icon { font-size: 38px; margin-bottom: 8px; }
+.jimin-popup-card h3 { color: #6b21a8; margin: 0 0 10px 0; font-size: 20px; font-weight: 700; }
+.jimin-popup-card p { color: #4b5563; font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+
+.jimin-popup-btn {
+  background: linear-gradient(135deg, #fde047 0%, #c084fc 100%);
+  color: #3b0764;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.4);
+  transition: transform 0.2s;
+}
+.jimin-popup-btn:hover { transform: scale(1.05); }
+
+/* HIỆU ỨNG RƠI & MỜ DẦN NƯỚC/TUYẾT TAN */
+@keyframes jiminRainFade {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(102vh) rotate(360deg);
+    opacity: 0; /* Mờ dần hoàn toàn khi xuống đáy */
+  }
+}
+
+.jimin-flake {
+  position: fixed;
+  top: 0;
+  pointer-events: none;
+  z-index: 9999;
+  animation-name: jiminRainFade;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+/* --- 1. Khung chứa Logo & Sticker --- */
+.logo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* --- 2. Vị trí & Kích thước Chimmy --- */
+.logo-sticker {
+  position: absolute;
+  top: -20px;       /* Căn độ cao: số càng âm càng nhích lên cao */
+  right: -5px;      /* Căn vị trí: số càng âm càng dịch sang phải */
+  width: 52px;      /* Độ lớn sticker Chimmy */
+  height: auto;
+  z-index: 10;
+  pointer-events: none; /* Tránh che mất lượt click vào logo */
+  transform-style: preserve-3d;
+}
+
+/* --- 3. Hiệu ứng 3D Đung Đưa + Nhún Nhảy --- */
+.chimmy-3d-bounce {
+  animation: chimmy3DBounce 2.2s infinite ease-in-out;
+}
+
+@keyframes chimmy3DBounce {
+  0%, 100% {
+    transform: perspective(400px) rotateY(0deg) rotateZ(0deg) translateY(0) scale(1);
+  }
+  25% {
+    /* Nghiêng 3D sang trái + nảy lên trên + phình to nhẹ */
+    transform: perspective(400px) rotateY(-18deg) rotateZ(-10deg) translateY(-10px) scale(1.1);
+  }
+  50% {
+    /* Tiếp đất nhẹ */
+    transform: perspective(400px) rotateY(0deg) rotateZ(0deg) translateY(-2px) scale(1);
+  }
+  75% {
+    /* Nghiêng 3D sang phải + nảy lên trên + phình to nhẹ */
+    transform: perspective(400px) rotateY(20deg) rotateZ(12deg) translateY(-10px) scale(1.1);
+  }
+}
   </style>
+</head>
+<body>
+  <!-- POPUP WELCOME SINH NHẬT JIMIN -->
+<div id="jiminPopupOverlay" class="jimin-popup-overlay">
+  <div class="jimin-popup-card">
+    <div class="jimin-popup-icon">🐣💛✨</div>
+    <h3>HAPPY JIMIN DAY! 🎂</h3>
+    <p>Chúc MIMI của chúng ta luôn bình an, hạnh phúc và tỏa sáng rực rỡ 💜✨</p>
+    <button id="jiminCloseBtn" onclick="closeJiminPopup()" class="jimin-popup-btn">STREAM ✨</button>
+  </div>
+</div>
+<!-- Thẻ hiển thị lượt truy cập -->
+<div class="visitor-badge">
+  ĐÃ CÓ <span id="visitor-count" style="color: #7000f9;">...</span> NGƯỜI GHÉ CHƠI
+</div>
   <!-- ============================================================
        🧱 2. KHU VỰC CẤU TRÚC GIAO DIỆN (HTML)
        ============================================================ -->
   <div class="container">
-    <img src="logo.png" class="profile-img" alt="logo">
+<!-- BANNER DÒNG TIN CHẠY CHỮ (NEWS TICKER) -->
+  <div class="ticker-wrap">
+    <div class="ticker" id="updateTickerContent">
+      🔥 <span class="ticker-highlight">UPDATE MỚI:</span> NAY BẠN ĂN CƠM CHƯA ? BOT ĂN RỒI &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; 🚀TẠO THÓI QUEN BẬT PLL STREAM MỖI NGÀY!!!
+    </div>
+  </div>
+
+    <div class="logo-wrapper">
+  <img src="logo.png" class="profile-img" alt="logo">
+  <img src="chimmy.png" alt="Chimmy Sticker" class="logo-sticker chimmy-3d-bounce">
+</div>
     
     <div class="top-title">NHỮNG CON BOT ĐAU LƯNG</div>
     <h1>SUPPORT ONLY FOR BTS</h1>
-    <p class="subtitle">UPDATE CÁC HOẠT ĐỘNG SUPPORT NHẠC SỐ CHO BTS ĐA NỀN TẢNG
-    </p>
+    <p class="subtitle">UPDATE CÁC HOẠT ĐỘNG SUPPORT NHẠC SỐ CHO BTS ĐA NỀN TẢNG</p>
 
-    <!-- Nơi đổ dữ liệu tự động từ Google Sheet -->
+    <!-- Nơi đổ dữ liệu tự động từ Google Sheet (Link stream & Tour Box) -->
     <div id="links-container">
       <p id="loading">⏳ CHỜ XÍU...</p>
     </div>
 
-    <!-- 📌 KHU VỰC CONTACT / LIÊN HỆ TEAM Ở CUỐI WEB (MỚI BỔ SUNG) -->
+    <!-- 📌 KHU VỰC CONTACT / LIÊN HỆ TEAM Ở CUỐI WEB -->
     <div class="contact-section">
       <div class="contact-title">ALO BOT ĐÂY</div>
       <div class="social-links">
@@ -307,8 +880,7 @@
         </a>
 
         <!-- Instagram -->
-        <a href="https://www.instagram.com/botdaulung.875?stkn=bnd0MmgzNGUyeXh2&utm_source=qr
-" target="_blank" class="social-btn" title="Instagram">
+        <a href="https://www.instagram.com/botdaulung.875?stkn=bnd0MmgzNGUyeXh2&utm_source=qr" target="_blank" class="social-btn" title="Instagram">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         </a>
 
@@ -321,12 +893,131 @@
     </div>
 
   </div>
+<!-- NÚT NỔI GỬI LỜI NHẮN (NẰM TRÊN NÚT CHEER BOMB) -->
+<div class="floating-msg-btn" onclick="openMessageModal()" title="Gửi lời nhắn lên Banner">
+  💌 <span>Gửi lời nhắn</span>
+</div>
+  <!-- 💣 FLOATING CHEER BOMB WIDGET (NÚT NỔI Ở GÓC DƯỚI MÀN HÌNH) -->
+  <div class="floating-cheer-btn" onclick="openCheerModal()" title="Cheer Bomb">
+    <img src="armybomb.png" class="cheer-icon-img" alt="armybomb" style="width:28px; height:28px;">
+    <span style="font-size: 20px; font-weight: 800; color: #3b0764;">
+      <span id="floating-bomb-count">0</span> 💣
+    </span>
+  </div>
 
-  <!-- Bảng Pop-up Hướng dẫn / Lưu ý -->
+  <!-- Pop-up Hướng dẫn chung -->
   <div id="guideModal" class="modal-overlay">
     <div class="modal-content">
       <span class="close-btn" onclick="closeGuide()">&times;</span>
       <div id="modal-body"></div>
+    </div>
+  </div>
+<!-- 💌 Pop-up Gửi Lời Nhắn Lên Banner -->
+<div id="messageModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeMessageModal()">&times;</span>
+    <h3 style="margin-top:5px; color:#5b00cc; font-size:16px;">
+      💌 GỬI LỜI NHẮN LÊN BANNER
+    </h3>
+    <p style="font-size:12.5px; color:#550c5c; margin-top:6px; line-height:1.5;">
+      Lời nhắn của bạn sẽ xuất hiện trực tiếp trên Banner chạy chữ toàn web!<br>
+      <strong style="color:#7000f9;">Mỗi ngày được gửi tối đa 2 lần (dưới 30 từ/lượt).</strong>
+    </p>
+
+    <textarea id="userMsgInput" class="cheer-input" rows="3" style="resize:none; text-align:left; font-size:13.5px; padding:10px;" placeholder="Nhập lời nhắn / lời chúc của bạn tại đây..."></textarea>
+
+    <div style="font-size:11.5px; color:#550c5c; margin-bottom:12px; text-align:right; font-weight:700;">
+      Còn lại: <strong id="msgRemCount" style="color:#7000f9; font-size:14px;">2</strong>/2 lượt hôm nay
+    </div>
+
+    <button class="btn-action btn-guide" style="width:100%; padding:10px;" onclick="submitBannerMessage()">
+      GỬI LỜI NHẮN 🚀
+    </button>
+  </div>
+</div>
+
+  <!-- 💣 Pop-up Mini-game Bắn Cheer Bomb -->
+  <div id="cheerModal" class="modal-overlay">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeCheerModal()">&times;</span>
+
+      <!-- BƯỚC 1: Nhập số account đã stream -->
+      <div id="cheerStepInput">
+        <h3 style="margin-top:5px; color:#5b00cc; font-size:16px;">
+          <img src="armybomb.png" class="cheer-icon-img" alt="armybomb"> BÁO CÁO STREAM HÔM NAY
+        </h3>
+        <p style="font-size:12.5px; color:#550c5c; margin-top:6px; line-height:1.5;">
+          Nhập số <strong>Account</strong> bạn đã stream hôm nay để đổi lượt Cheer Bomb! 💜
+        </p>
+        <input type="number" id="cheerAccInput" class="cheer-input" min="1" max="50" placeholder="Nhập số acc (VD: 6)">
+        <button class="btn-action btn-guide" style="width:100%; padding:10px;" onclick="startCheerTapping()">
+          ĐỔI LƯỢT 💣
+        </button>
+      </div>
+
+      <!-- BƯỚC 2: Tự tay Bắn Cheer Bomb (Tapping Mini-game) -->
+      <div id="cheerStepTap" style="display: none;">
+        <h3 style="margin-top:5px; color:#5b00cc; font-size:16px;">
+          💜CHEER BOMB💜
+        </h3>
+        <p style="font-size:13px; color:#550c5c; margin: 8px 0; font-weight: 700;">
+          Còn lại: <span id="clicksRemainingText" style="color:#7000f9; font-size:20px; font-weight:900;">0</span> lượt bấm
+        </p>
+        
+        <div style="margin: 22px 0; position: relative;">
+          <img src="armybomb.png" id="tapArmyBombImg" style="width: 95px; height: 95px; cursor: pointer; filter: drop-shadow(0 6px 18px rgba(112,0,249,0.5)); transition: transform 0.1s;" onclick="handleBombTap(event)" alt="Tap Bomb">
+        </div>
+        <p style="font-size:11.5px; color:#7000f9; font-weight: 600;">(Chạm liên tục vào chiếc ARMY Bomb)</p>
+      </div>
+
+      <!-- BƯỚC 3: Đã hoàn thành -->
+      <div id="cheerStepDone" style="display: none;">
+        <img src="armybomb.png" style="width: 60px; height: 60px; margin-bottom: 10px;" alt="done">
+        <h3 style="color:#5b00cc; font-size:16px;">THÀNH CÔNG! 🎉</h3>
+        <p style="font-size:13px; color:#550c5c; margin: 10px 0; line-height:1.5;">
+          Cảm ơn bạn đã đóng góp <strong id="submittedAccCount">0</strong> acc stream 💜<br>
+          Mỗi ngày đổi được 1 lần, hệ thống reset vào 7:00 sáng.
+        </p>
+        <button class="btn-action btn-guide" style="width:100%; padding:8px;" onclick="closeCheerModal()">ĐÓNG</button>
+      </div>
+<!-- KHUNG THÔNG TIN CÁ NHÂN & MÃ KHÔI PHỤC -->
+<div class="user-sync-card">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <span>👤 Biệt danh: <strong id="display-user-nickname">Chưa đặt</strong></span>
+    <span onclick="changeUserNickname()" style="cursor:pointer; text-decoration:underline; font-size:11px; opacity:0.9;">[Đổi tên]</span>
+  </div>
+
+  <div style="margin-top: 8px; font-weight: 700; color: #3b0764;">
+    📊 Tổng tích lũy: <strong id="display-user-total-accs" style="color: #7000f9; font-size: 15px;">0</strong> <span style="font-size: 12px;">acc</span>
+  </div>
+
+  <div style="margin-top: 8px; display: flex; justify-content: space-between; align-items: center;">
+    <span>🔑 Mã khôi phục: <span id="display-sync-code" class="sync-code-badge">CB-XXXXX</span></span>
+    <button class="btn-sync-action" onclick="copyUserSyncCode()">📋 Sao chép</button>
+  </div>
+
+  <div style="text-align: right; margin-top: 10px;">
+    <button class="btn-sync-action" onclick="handleRestoreButtonClick()" style="background: #4a0e68; border: none;">
+      Khôi phục / Đổi máy
+    </button>
+  </div>
+</div>
+      <!-- Xem Lịch Sử -->
+      <div style="margin-top: 15px; border-top: 1px dashed rgba(85,12,92,0.2); padding-top: 10px;">
+        <span class="cheer-history-toggle" onclick="toggleCheerHistory()">
+          📊 Xem lịch sử các ngày trước
+        </span>
+        <div id="cheer-history-wrapper" class="cheer-history-box" style="display: none; text-align: left;">
+          <div class="cheer-history-header-row">
+            <span>📅 NGÀY</span>
+            <span>💣 TỔNG CHEER BOMB</span>
+          </div>
+          <div id="cheer-history-list">
+            <p style="text-align:center; color:#550c5c; font-size:11px; margin: 4px 0;">⏳ CHỜ XÍU...</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -336,16 +1027,321 @@
   <script>
     const SHEET_ID = "12vlSoBt24a-u9CWe4G0SvLKi9LpXIOlsKyfpbpsNv6Y";
     const TAB_NAME = "THEME";
+    const TAB_TOUR = "ARIRANGTOUR";
+    const TAB_HISTORY = "CheerBomb";
 
+    let clicksRemaining = 0; // Số lượt bấm còn lại trong lượt hiện tại
+
+    // 💣 1. LOGIC XÁC ĐỊNH "NGÀY CHEER BOMB" (RESET LÚC 7:00 SÁNG)
+    function getCheerDayKey() {
+  const now = new Date();
+  const adjusted = new Date(now.getTime() - (7 * 60 * 60 * 1000));
+  const year = adjusted.getFullYear();
+  const month = String(adjusted.getMonth() + 1).padStart(2, '0');
+  const day = String(adjusted.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+window.getCheerDayKey = getCheerDayKey;
+
+    function getTodayCheerCount() {
+      const dayKey = getCheerDayKey();
+      const storedCount = localStorage.getItem(`cheer_total_${dayKey}`);
+      return storedCount ? parseInt(storedCount) : 0;
+    }
+
+    function updateFloatingBadge() {
+      const total = getTodayCheerCount();
+      const badge = document.getElementById('floating-bomb-count');
+      if (badge) badge.innerText = total;
+    }
+
+    // 💣 2. MỞ / ĐÓNG MODAL CHEER BOMB & CHUYỂN BƯỚC BẮN
+    function openCheerModal() {
+      if (typeof updateUIUserInfo === 'function') {
+    updateUIUserInfo(); // 👈 Cập nhật số acc tích lũy mới nhất khi mở Pop-up
+  }
+      const dayKey = getCheerDayKey();
+      const hasSubmitted = localStorage.getItem(`cheer_submitted_${dayKey}`);
+      const rem = localStorage.getItem(`cheer_rem_${dayKey}`);
+
+      document.getElementById('cheerModal').style.display = 'flex';
+
+      if (rem && parseInt(rem) > 0) {
+        // Đang bấm dở
+        clicksRemaining = parseInt(rem);
+        showStep('tap');
+      } else if (hasSubmitted) {
+        // Đã hoàn thành trong ngày
+        const userAccs = localStorage.getItem(`cheer_user_accs_${dayKey}`) || '0';
+        document.getElementById('submittedAccCount').innerText = userAccs;
+        showStep('done');
+      } else {
+        // Chưa nhập báo cáo
+        showStep('input');
+      }
+    }
+
+    function closeCheerModal() {
+      document.getElementById('cheerModal').style.display = 'none';
+    }
+
+    function showStep(stepName) {
+      document.getElementById('cheerStepInput').style.display = (stepName === 'input') ? 'block' : 'none';
+      document.getElementById('cheerStepTap').style.display = (stepName === 'tap') ? 'block' : 'none';
+      document.getElementById('cheerStepDone').style.display = (stepName === 'done') ? 'block' : 'none';
+
+      if (stepName === 'tap') {
+        document.getElementById('clicksRemainingText').innerText = clicksRemaining;
+      }
+    }
+
+    // BẮT ĐẦU MINI-GAME: NHẬN LƯỢT BẮN TƯƠNG ỨNG SỐ ACC
+    function startCheerTapping() {
+      const input = document.getElementById('cheerAccInput');
+      const val = parseInt(input.value);
+
+      if (isNaN(val) || val <= 0) {
+        alert("Vui lòng nhập số lượng account hợp lệ (ít nhất 1 acc)!");
+        return;
+      }
+
+      if (val > 50) {
+        alert("Số lượng tối đa cho mỗi lần đóng góp là 50 account!");
+        return;
+      }
+
+      const dayKey = getCheerDayKey();
+      clicksRemaining = val;
+      
+      localStorage.setItem(`cheer_rem_${dayKey}`, clicksRemaining.toString());
+      localStorage.setItem(`cheer_user_accs_${dayKey}`, val.toString());
+
+      showStep('tap');
+    }
+
+   // XỬ LÝ KHI BẤM TAY VÀO ARMY BOMB (HIỆU ỨNG BOMB BAY LÊN)
+    function handleBombTap(event) {
+      if (clicksRemaining <= 0) return;
+
+      const dayKey = getCheerDayKey();
+
+      // 1. Giảm 1 lượt bấm
+      clicksRemaining--;
+      localStorage.setItem(`cheer_rem_${dayKey}`, clicksRemaining.toString());
+      document.getElementById('clicksRemainingText').innerText = clicksRemaining;
+
+      // 2. Tăng 1 điểm vào tổng Cheer Bomb hôm nay
+      const currentTotal = getTodayCheerCount();
+      const newTotal = currentTotal + 1;
+      localStorage.setItem(`cheer_total_${dayKey}`, newTotal.toString());
+      updateFloatingBadge();
+
+      // 3. Hiệu ứng nhún chiếc ARMY Bomb khi bấm
+      const bombImg = document.getElementById('tapArmyBombImg');
+      bombImg.style.transform = 'scale(0.82)';
+      setTimeout(() => { bombImg.style.transform = 'scale(1)'; }, 100);
+
+      // 4. Tạo hạt ARMY Bomb nhỏ bay từ vị trí chạm con chuột/ngón tay lên
+      createFlyingParticle(event.clientX, event.clientY);
+
+      // 5. Nếu đã bấm hết lượt
+      if (clicksRemaining === 0) {
+        localStorage.setItem(`cheer_submitted_${dayKey}`, 'true');
+        const userAccs = localStorage.getItem(`cheer_user_accs_${dayKey}`);
+        document.getElementById('submittedAccCount').innerText = userAccs;
+
+        // 💣 GỬI DỮ LIỆU SANG FIREBASE KHI BẤM XONG HẾT LƯỢT
+        if (typeof window.sendDataToFirebase === 'function') {
+          window.sendDataToFirebase(userAccs);
+        }
+if (typeof saveUserDataToFirebase === 'function') {
+          saveUserDataToFirebase(savedAccs);
+        }
+        setTimeout(() => {
+          showStep('done');
+        }, 500);
+      }
+    }
+
+    // TẠO HIỆU ỨNG HẠT BOMB BAY VỤT LÊN TRÊN
+    function createFlyingParticle(x, y) {
+      const p = document.createElement('img');
+      p.src = 'armybomb.png';
+      p.className = 'flying-bomb-particle';
+      p.style.left = `${x - 16}px`;
+      p.style.top = `${y - 16}px`;
+      
+      document.body.appendChild(p);
+
+      // Tự động xóa thẻ HTML sau khi hiệu ứng hoạt hình kết thúc (1 giây)
+      setTimeout(() => {
+        if (p && p.parentNode) {
+          p.parentNode.removeChild(p);
+        }
+      }, 1000);
+    }
+
+    // Xem Lịch Sử
+    function toggleCheerHistory() {
+  const wrapper = document.getElementById('cheer-history-wrapper');
+  if (!wrapper) return;
+
+  if (wrapper.style.display === 'none' || wrapper.style.display === '') {
+    wrapper.style.display = 'block';
+    
+    // Gọi đúng hàm Firebase đã khai báo ở module bên dưới
+    if (typeof window.fetchCheerHistory === 'function') {
+      window.fetchCheerHistory();
+    }
+  } else {
+    wrapper.style.display = 'none';
+  }
+}
+
+    // 🎟️ 3. TẠO KHUNG TỔNG BÁO CÁO DOANH THU TOUR (ACCORDION GOM GỌN)
+    function createTourMainBox() {
+      const tourBox = document.createElement('div');
+      tourBox.className = 'tour-main-card';
+      tourBox.innerHTML = `
+        <div class="tour-main-header" onclick="toggleMainTour()">
+          <span>🎟️ DOANH THU ARIRANG WORLD TOUR</span>
+          <span class="btn-action btn-guide" id="tour-main-btn">XEM</span>
+        </div>
+        <div id="tour-locations-wrapper" class="tour-locations-wrapper" style="display: none;">
+          <div style="font-size: 12px; color: #550c5c; font-weight: 600; font-style: italic; margin-bottom: 10px; text-align: center;">
+            📌 Ghi chú: Số liệu doanh thu sẽ được cập nhật hàng tháng theo báo cáo từ Billboard Boxscore. 
+          </div>
+
+          <div id="tour-data-container">
+            <p style="font-size: 12px; color: #550c5c; text-align: center; margin: 8px 0;">⏳ Đang tải số liệu doanh thu...</p>
+          </div>
+        </div>
+      `;
+      return tourBox;
+    }
+
+    function toggleMainTour() {
+      const wrapper = document.getElementById('tour-locations-wrapper');
+      const btn = document.getElementById('tour-main-btn');
+      if (!wrapper) return;
+
+      if (wrapper.style.display === 'none' || wrapper.style.display === '') {
+        wrapper.style.display = 'block';
+        if (btn) btn.innerText = 'ĐÓNG';
+      } else {
+        wrapper.style.display = 'none';
+        if (btn) btn.innerText = 'XEM';
+      }
+    }
+
+    function toggleLocationDetail(headerElem) {
+      const card = headerElem.parentElement;
+      const detail = card.querySelector('.tour-detail-content');
+      if (!detail) return;
+
+      if (detail.style.display === 'none' || detail.style.display === '') {
+        detail.style.display = 'block';
+        card.classList.add('active');
+      } else {
+        detail.style.display = 'none';
+        card.classList.remove('active');
+      }
+    }
+
+    async function fetchTourRevenue() {
+      const container = document.getElementById('tour-data-container');
+      if (!container) return;
+
+      try {
+        const response = await fetch(`https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(TAB_TOUR)}`);
+        const rawData = await response.json();
+
+        if (!rawData || rawData.length === 0) {
+          container.innerHTML = "<p style='font-size:12px; color:#550c5c; text-align:center;'>Chưa có số liệu doanh thu.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
+
+        rawData.forEach(item => {
+          let location = "";
+          let date = "";
+          let tickets = "";
+          let revenue = "";
+
+          Object.keys(item).forEach(key => {
+            const cleanKey = key.trim().toLowerCase();
+            if (cleanKey.includes("vị trí") || cleanKey.includes("vi tri") || cleanKey.includes("location")) {
+              location = item[key];
+            } else if (cleanKey.includes("ngày") || cleanKey.includes("ngay") || cleanKey.includes("date")) {
+              date = item[key];
+            } else if (cleanKey.includes("vé") || cleanKey.includes("ve") || cleanKey.includes("ticket")) {
+              tickets = item[key];
+            } else if (cleanKey.includes("doanh thu") || cleanKey.includes("revenue")) {
+              revenue = item[key];
+            }
+          });
+
+          if (!location) return;
+
+          const formattedRevenue = (revenue || "-").replace(/\r?\n/g, "<br>");
+
+          const locCard = document.createElement('div');
+          locCard.className = 'tour-location-card';
+          locCard.innerHTML = `
+            <div class="tour-location-header" onclick="toggleLocationDetail(this)">
+              <span>📍 ${location}</span>
+              <span class="tour-expand-icon">▼</span>
+            </div>
+            <div class="tour-detail-content" style="display: none;">
+              <div class="tour-info-list">
+                <div class="tour-info-item">
+                  <span class="tour-label">📅 Ngày diễn:</span>
+                  <span class="tour-value">${date || '-'}</span>
+                </div>
+                <div class="tour-info-item">
+                  <span class="tour-label">🎟️ Tổng vé bán:</span>
+                  <span class="tour-value">${tickets || '-'}</span>
+                </div>
+                <div class="tour-info-item">
+                  <span class="tour-label">💵 Doanh số (TB giá):</span>
+                  <span class="tour-value">${formattedRevenue}</span>
+                </div>
+              </div>
+            </div>
+          `;
+          container.appendChild(locCard);
+        });
+
+      } catch (error) {
+        console.error("Lỗi tải Doanh thu Tour:", error);
+        container.innerHTML = "<p style='font-size:12px; color:#b91c1c; text-align:center;'>Không thể tải số liệu doanh thu tour.</p>";
+      }
+    }
+
+    // 4. TẢI LINK STREAM & GHÉP CÁC KHUNG CHỨC NĂNG VÀO VỊ TRÍ CHUẨN
     async function fetchLinksFromSheet() {
       const container = document.getElementById('links-container');
       try {
         const response = await fetch(`https://opensheet.elk.sh/${SHEET_ID}/${encodeURIComponent(TAB_NAME)}`);
         const rawData = await response.json();
-
+    
         container.innerHTML = ""; 
+// Lấy bài viết thuộc danh mục UPDATE mới nhất đưa lên Banner
+    const latestUpdate = rawData.find(item => {
+      const cat = (item.CATEGORY || item.category || "").toUpperCase();
+      return cat.includes("UPDATE");
+    });
 
+    if (latestUpdate) {
+      const updateTitle = latestUpdate.TITLE || latestUpdate.title || "Có hoạt động mới!";
+      const tickerElem = document.getElementById('updateTickerContent');
+      if (tickerElem) {
+        tickerElem.innerHTML = `🔥 <span class="ticker-highlight">UPDATE MỚI:</span> ${updateTitle} &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; 🚀 CLICK VÀO MỤC UPDATE BÊN DƯỚI ĐỂ XEM CHI TIẾT!`;
+      }
+    }
         let lastCategory = "";
+        let tourInserted = false;
 
         rawData.forEach(item => {
           const row = {};
@@ -364,6 +1360,12 @@
           if (!title && !category) return;
 
           if (category && category !== lastCategory) {
+            // Khi vừa hoàn thành mục "UPDATE HOẠT ĐỘNG" -> Chèn Khung Tour Box vào ngay!
+            if (!tourInserted && lastCategory && lastCategory.toLowerCase().includes("update")) {
+              container.appendChild(createTourMainBox());
+              tourInserted = true;
+            }
+
             const catHeader = document.createElement('div');
             catHeader.className = 'category-title';
             catHeader.innerText = category;
@@ -396,12 +1398,20 @@
           container.appendChild(box);
         });
 
+        if (!tourInserted) {
+          container.appendChild(createTourMainBox());
+          tourInserted = true;
+        }
+
+        fetchTourRevenue();
+
       } catch (error) {
         console.error("Lỗi tải Google Sheet:", error);
         container.innerHTML = "<p style='color:red;'>Không thể tải dữ liệu từ Google Sheet. Vui lòng kiểm tra lại kết nối mạng!</p>";
       }
     }
 
+    // 5. POP-UP MODAL HƯỚNG DẪN CHUNG
     function openGuide(title, contentText, imgUrl) {
       const modalBody = document.getElementById('modal-body');
       
@@ -424,12 +1434,427 @@
     }
 
     window.onclick = function(event) {
-      let modal = document.getElementById('guideModal');
-      if (event.target == modal) { modal.style.display = "none"; }
+      let guideModal = document.getElementById('guideModal');
+      let cheerModal = document.getElementById('cheerModal');
+      if (event.target == guideModal) { guideModal.style.display = "none"; }
+      if (event.target == cheerModal) { cheerModal.style.display = "none"; }
     }
 
+    // Khởi chạy ứng dụng
+    updateFloatingBadge();
     fetchLinksFromSheet();
   </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, get, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyCWGSuA2uDHPk-Qeu9dUs9YzF21TbaIMdg",
+    authDomain: "cheerbomb-949e7.firebaseapp.com",
+    databaseURL: "https://cheerbomb-949e7-default-rtdb.asia-southeast1.firebasedatabase.app", // ✅ Đã thêm dấu phẩy
+    projectId: "cheerbomb-949e7",
+    storageBucket: "cheerbomb-949e7.firebasestorage.app",
+    messagingSenderId: "679595042969",
+    appId: "1:679595042969:web:24c996499fae84006d3008",
+    measurementId: "G-MEB0G4BNTJ"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+// ============================================================
+   // 💌 HỆ THỐNG GỬI LỜI NHẮN LÊN BANNER (REALTIME)
+   // ============================================================
+
+   // 1. Mở Pop-up Gửi Lời Nhắn
+   window.openMessageModal = function() {
+     const dayKey = typeof window.getCheerDayKey === 'function' ? window.getCheerDayKey() : new Date().toISOString().split('T')[0];
+     const sentCount = parseInt(localStorage.getItem(`msg_count_${dayKey}`) || '0');
+     const rem = 2 - sentCount;
+
+     document.getElementById('msgRemCount').innerText = rem > 0 ? rem : 0;
+     document.getElementById('messageModal').style.display = 'flex';
+   };
+
+   window.closeMessageModal = function() {
+     document.getElementById('messageModal').style.display = 'none';
+   };
+
+   // 2. Gửi Lời Nhắn lên Firebase
+   window.submitBannerMessage = async function() {
+     const dayKey = typeof window.getCheerDayKey === 'function' ? window.getCheerDayKey() : new Date().toISOString().split('T')[0];
+     const sentCount = parseInt(localStorage.getItem(`msg_count_${dayKey}`) || '0');
+
+     if (sentCount >= 2) {
+       alert("⚠️ Hôm nay bạn đã gửi đủ 2 lời nhắn rồi! Vui lòng quay lại sau 7:00 sáng mai nhé.");
+       return;
+     }
+
+     const inputElem = document.getElementById('userMsgInput');
+     const rawText = inputElem ? inputElem.value.trim() : "";
+
+     if (!rawText) {
+       alert("Vui lòng nhập nội dung lời nhắn!");
+       return;
+     }
+
+     const words = rawText.split(/\s+/).filter(w => w.length > 0);
+     if (words.length > 30) {
+       alert(`⚠️ Lời nhắn của bạn dài ${words.length} từ. Vui lòng rút gọn xuống tối đa 30 từ!`);
+       return;
+     }
+
+     const nick = localStorage.getItem('cheer_user_nickname') || 'ARMY';
+     const msgRef = ref(db, `banner_messages/${dayKey}`);
+
+     try {
+       await push(msgRef, {
+         nickname: nick,
+         text: rawText,
+         timestamp: Date.now()
+       });
+
+       localStorage.setItem(`msg_count_${dayKey}`, (sentCount + 1).toString());
+       
+       if (inputElem) inputElem.value = "";
+       closeMessageModal();
+       alert("🎉 Đã gửi lời nhắn thành công! Lời nhắn của bạn đang chạy trên Banner.");
+     } catch (err) {
+       console.error("Lỗi gửi lời nhắn:", err);
+       alert("Không thể gửi lời nhắn, vui lòng kiểm tra lại kết nối mạng!");
+     }
+   };
+
+   // 3. Lắng nghe Lời nhắn từ Firebase & Cập nhật lên Banner Realtime
+   function listenBannerMessages() {
+     const dayKey = typeof window.getCheerDayKey === 'function' ? window.getCheerDayKey() : new Date().toISOString().split('T')[0];
+     const msgRef = ref(db, `banner_messages/${dayKey}`);
+
+     onValue(msgRef, (snapshot) => {
+       const tickerElem = document.getElementById('updateTickerContent');
+       if (!tickerElem) return;
+
+       if (snapshot.exists()) {
+         const data = snapshot.val();
+         const msgList = Object.values(data);
+         
+         const tickerHtml = msgList.map(m => 
+           `💬 <span class="ticker-highlight">${m.nickname}:</span> "${m.text}"`
+         ).join(' &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; ');
+
+         tickerElem.innerHTML = tickerHtml + ' &nbsp;&nbsp;&nbsp;✦&nbsp;&nbsp;&nbsp; 💛 HAPPY JIMIN DAY 🎂🐣';
+       } else {
+         tickerElem.innerHTML = `💬 <span class="ticker-highlight">NCBDL TEAM:</span> "Hãy là người đầu tiên gửi lời chúc cho ngày hôm nay! Bấm nút GỬI TIN NHẮN ở góc dưới bên phải để gửi nhé! 💜"`;
+       }
+     });
+   }
+
+   listenBannerMessages();
+  // 1. Hàm gửi dữ liệu lên Firebase
+  async function sendDataToFirebase(amount) {
+    const today = typeof window.getCheerDayKey === 'function' ? window.getCheerDayKey() : new Date().toISOString().split('T')[0];
+    const dayRef = ref(db, `cheer_history/${today}`);
+
+    try {
+      const snapshot = await get(dayRef);
+      let currentTotal = 0;
+      if (snapshot.exists()) {
+        const val = snapshot.val();
+        currentTotal = (val && typeof val.total === 'number') ? val.total : 0;
+      }
+
+      await set(dayRef, {
+        total: currentTotal + parseInt(amount)
+      });
+      console.log("✅ Đã lưu dữ liệu thành công lên Firebase!");
+    } catch (error) {
+      console.error("❌ Lỗi khi gửi dữ liệu lên Firebase:", error);
+    }
+  }
+
+  // 2. Hàm lấy lịch sử từ Firebase & Hiển thị lên giao diện
+  async function fetchCheerHistoryFromFirebase() {
+    const listContainer = document.getElementById('cheer-history-list');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = "<p style='text-align:center; color:#7000f9; font-size:11px;'>⏳ Đang tải lịch sử...</p>";
+
+    try {
+      const snapshot = await get(ref(db, 'cheer_history'));
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+
+        if (!data || typeof data !== 'object') {
+          listContainer.innerHTML = "<p style='text-align:center; color:#550c5c; font-size:11px;'>Chưa có dữ liệu lịch sử.</p>";
+          return;
+        }
+
+        // Lọc bỏ phần tử null/undefined và chuẩn hóa dữ liệu
+        const historyArray = Object.keys(data)
+          .filter(dateKey => data[dateKey] !== null && data[dateKey] !== undefined)
+          .map(dateKey => {
+            const val = data[dateKey];
+            const total = (val && typeof val.total === 'number') ? val.total : (typeof val === 'number' ? val : 0);
+            return { date: dateKey, total: total };
+          });
+
+        // Sắp xếp ngày mới nhất lên đầu
+        historyArray.sort((a, b) => b.date.localeCompare(a.date));
+
+        const recent7Days = historyArray.slice(0, 7);
+
+        if (recent7Days.length === 0) {
+          listContainer.innerHTML = "<p style='text-align:center; color:#550c5c; font-size:11px;'>Chưa có dữ liệu lịch sử.</p>";
+          return;
+        }
+
+        listContainer.innerHTML = "";
+        recent7Days.forEach(item => {
+          const rowElem = document.createElement('div');
+          rowElem.className = 'cheer-history-item';
+          rowElem.innerHTML = `
+            <span style="color:#5b00cc; font-weight:700;">📅 ${item.date}</span>
+            <span style="color:#7000f9; font-weight:800;">💣 ${item.total} Bomb</span>
+          `;
+          listContainer.appendChild(rowElem);
+        });
+      } else {
+        listContainer.innerHTML = "<p style='text-align:center; color:#550c5c; font-size:11px;'>Chưa có dữ liệu lịch sử.</p>";
+      }
+    } catch (error) {
+      console.error("Lỗi khi tải lịch sử Firebase:", error);
+      listContainer.innerHTML = "<p style='text-align:center; color:#c00; font-size:11px;'>Không thể tải lịch sử.</p>";
+    }
+  }
+
+  window.sendDataToFirebase = sendDataToFirebase;
+  window.fetchCheerHistory = fetchCheerHistoryFromFirebase;
+  // ============================================================
+// 🔑 MÃ KHÔI PHỤC (SYNC CODE), BIỆT DANH & TÍCH LŨY
+// ============================================================
+
+// 1. Khởi tạo / Lấy Mã Khôi Phục & Biệt Danh từ localStorage
+function getOrCreateUserSyncCode() {
+  let userCode = localStorage.getItem('cheer_user_sync_code');
+  let userNick = localStorage.getItem('cheer_user_nickname');
+
+  if (!userCode) {
+    // Tạo mã ngẫu nhiên dạng CB-XXXXX (VD: CB-89A12)
+    userCode = 'CB-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+    localStorage.setItem('cheer_user_sync_code', userCode);
+  }
+
+  if (!userNick) {
+    userNick = "DOI_TEN"; // Tên mặc định nếu chưa đặt
+    localStorage.setItem('cheer_user_nickname', userNick);
+  }
+
+  return { userCode, userNick };
+}
+
+// Hiển thị thông tin người dùng & Tổng số acc tích lũy ra Pop-up
+function updateUIUserInfo() {
+  const { userCode, userNick } = getOrCreateUserSyncCode();
+  const totalAccs = localStorage.getItem('user_total_accs') || '0';
+
+  const codeElem = document.getElementById('display-sync-code');
+  const nickElem = document.getElementById('display-user-nickname');
+  const totalElem = document.getElementById('display-user-total-accs');
+
+  if (codeElem) codeElem.innerText = userCode;
+  if (nickElem) nickElem.innerText = userNick;
+  if (totalElem) totalElem.innerText = totalAccs;
+}
+
+// 3. Đổi biệt danh (Giới hạn 30 ngày / 1 lần)
+window.changeUserNickname = async function() {
+  const lastChanged = localStorage.getItem('cheer_nickname_last_changed');
+  const NOW = Date.now();
+  const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000; // 30 ngày tính theo millisecond
+
+  // Kiểm tra xem đã đủ 30 ngày kể từ lần đổi gần nhất chưa
+  if (lastChanged) {
+    const timePassed = NOW - parseInt(lastChanged);
+    if (timePassed < THIRTY_DAYS_MS) {
+      const daysLeft = Math.ceil((THIRTY_DAYS_MS - timePassed) / (1000 * 60 * 60 * 24));
+      alert(`⚠️ Bạn chỉ có thể đổi biệt danh 30 ngày một lần!\nVui lòng quay lại sau ${daysLeft} ngày nữa.`);
+      return;
+    }
+  }
+
+  const currentNick = localStorage.getItem('cheer_user_nickname') || "";
+  const newNick = prompt("Nhập Biệt danh / Tên Fandom mới của bạn:", currentNick);
+
+  if (newNick && newNick.trim() !== "") {
+    const cleanNick = newNick.trim();
+    
+    // Lưu biệt danh mới & Mốc thời gian đổi vào máy
+    localStorage.setItem('cheer_user_nickname', cleanNick);
+    localStorage.setItem('cheer_nickname_last_changed', NOW.toString());
+
+    // Cập nhật lên Firebase
+    const { userCode } = getOrCreateUserSyncCode();
+    try {
+      if (typeof ref !== 'undefined' && typeof update !== 'undefined' && typeof db !== 'undefined') {
+        await update(ref(db, `users/${userCode}`), { 
+          nickname: cleanNick,
+          lastNicknameChange: NOW
+        });
+      }
+    } catch(e) {
+      console.log("Lỗi cập nhật tên lên Firebase:", e);
+    }
+
+    updateUIUserInfo();
+    alert(`✅ Đã đổi biệt danh thành công: ${cleanNick}`);
+  }
+};
+
+// 4. Sao chép Mã Khôi Phục khi bấm [📋 Sao chép]
+window.copyUserSyncCode = function() {
+  const { userCode } = getOrCreateUserSyncCode();
+  navigator.clipboard.writeText(userCode).then(() => {
+    alert(`📋 Đã sao chép Mã Khôi Phục: ${userCode}\nHãy lưu/chụp ảnh lại mã này để khôi phục khi đổi máy nhé!`);
+  }).catch(() => {
+    prompt("Mã khôi phục của bạn là (hãy sao chép thủ công):", userCode);
+  });
+};
+
+// 5. Khôi phục dữ liệu khi bấm [Khôi phục / Đổi máy]
+window.handleRestoreButtonClick = async function() {
+  const inputCode = prompt("🔑 Nhập Mã Khôi Phục cá nhân của bạn (Ví dụ: CB-89A12):");
+  if (!inputCode) return;
+
+  const cleanCode = inputCode.trim().toUpperCase();
+
+  try {
+    const userRef = ref(db, `users/${cleanCode}`);
+    const snapshot = await get(userRef);
+
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      
+      // Lưu dữ liệu đã khôi phục vào máy mới
+      localStorage.setItem('cheer_user_sync_code', cleanCode);
+      if (userData.nickname) localStorage.setItem('cheer_user_nickname', userData.nickname);
+      if (userData.totalAccs !== undefined) localStorage.setItem('user_total_accs', userData.totalAccs);
+if (userData.lastNicknameChange) localStorage.setItem('cheer_nickname_last_changed', userData.lastNicknameChange);
+      alert(`🎉 Khôi phục thành công!\nBiệt danh: ${userData.nickname || 'ARMY'}\nTổng acc đã tích lũy: ${userData.totalAccs || 0} acc`);
+      location.reload(); // Tải lại trang để áp dụng giao diện & tiến trình mới
+    } else {
+      alert("❌ Mã khôi phục không tồn tại trên hệ thống. Vui lòng kiểm tra lại!");
+    }
+  } catch (err) {
+    console.error("Lỗi khôi phục:", err);
+    alert("Đã xảy ra lỗi khi kiểm tra mã trên hệ thống!");
+  }
+};
+
+// 7. Cập nhật dữ liệu cá nhân lên Firebase khi người dùng gửi báo cáo Cheer Bomb
+async function saveUserDataToFirebase(addedAccs) {
+  const { userCode, userNick } = getOrCreateUserSyncCode();
+  const currentTotal = parseInt(localStorage.getItem('user_total_accs') || '0');
+  const newTotal = currentTotal + parseInt(addedAccs);
+
+  // Lưu lại vào máy người dùng
+  localStorage.setItem('user_total_accs', newTotal);
+
+  // Đồng bộ lên Firebase
+  try {
+    const userRef = ref(db, `users/${userCode}`);
+    await set(userRef, {
+      nickname: userNick,
+      totalAccs: newTotal,
+      lastUpdated: new Date().toISOString()
+    });
+    console.log(`✅ Đã đồng bộ ${newTotal} acc cho ${userNick} (${userCode}) lên Firebase`);
+  } catch (e) {
+    console.error("Lỗi lưu dữ liệu cá nhân lên Firebase:", e);
+  }
+}
+// Chạy tự động khi tải xong trang web
+document.addEventListener('DOMContentLoaded', () => {
+  updateUIUserInfo();
+});
+// Hàm đếm lượt truy cập CHUẨN THEO THIẾT BỊ (Mỗi máy đếm 1 lần)
+async function updateVisitorCount() {
+  const visitRef = ref(db, 'site_visits');
+  try {
+    const snapshot = await get(visitRef);
+    let count = snapshot.exists() ? (parseInt(snapshot.val()) || 0) : 0;
+
+    // Đổi sang localStorage: Đóng tab hay F5 cũng KHÔNG bị đếm lại
+    if (!localStorage.getItem('has_visited_site')) {
+      count++;
+      await set(visitRef, count);
+      localStorage.setItem('has_visited_site', 'true');
+    }
+
+    const countElem = document.getElementById('visitor-count');
+    if (countElem) {
+      countElem.innerText = count.toLocaleString('vi-VN'); // Hiển thị số dạng 1.234
+    }
+  } catch (err) {
+    console.error("Lỗi đếm lượt truy cập:", err);
+  }
+}
+// 1. ĐÓNG POPUP WELCOME
+function closeJiminPopup() {
+  const overlay = document.getElementById('jiminPopupOverlay');
+  if (overlay) {
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.remove(), 300);
+  }
+}
+
+// 2. HIỆU ỨNG MƯA ICON (🐣 💛 ✨ 💜 🎂) RƠI MỜ DẦN
+function startJiminRainEffect() {
+  const symbols = ['🐣', '💛', '✨', '💜', '🎂'];
+  
+  setInterval(() => {
+    const flake = document.createElement('div');
+    flake.className = 'jimin-flake';
+    flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    
+    // Tùy chỉnh vị trí xuất hiện ngẫu nhiên theo chiều ngang
+    flake.style.left = Math.random() * 98 + 'vw';
+    
+    // Kích thước ngẫu nhiên (14px - 26px)
+    const size = Math.random() * 12 + 14;
+    flake.style.fontSize = size + 'px';
+    
+    // Thời gian rơi ngẫu nhiên (3.5s - 6.5s) tạo độ sinh động
+    const duration = Math.random() * 3 + 3.5;
+    flake.style.animationDuration = duration + 's';
+    
+    document.body.appendChild(flake);
+
+    // Tự động dọn dẹp thẻ div sau khi rơi xong
+    setTimeout(() => {
+      flake.remove();
+    }, duration * 1000);
+  }, 280); // Tốc độ tạo icon rơi
+}
+
+// ĐÓNG POPUP (Gán vào window để đảm bảo gọi từ đâu cũng chạy)
+window.closeJiminPopup = function() {
+  const overlay = document.getElementById('jiminPopupOverlay');
+  if (overlay) {
+    overlay.style.opacity = '0';
+    setTimeout(() => overlay.remove(), 300);
+  }
+};
+
+// KÍCH HOẠT HIỆU ỨNG KHI TRANG TẢI XONG
+document.addEventListener('DOMContentLoaded', () => {
+  const closeBtn = document.getElementById('jiminCloseBtn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', window.closeJiminPopup);
+  }
+
+  // Chạy hiệu ứng mưa icon
+  startJiminRainEffect();
+});
+</script>
 </body>
 </html>
