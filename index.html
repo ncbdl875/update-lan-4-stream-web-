@@ -1188,19 +1188,18 @@ window.getCheerDayKey = getCheerDayKey;
         const userAccs = localStorage.getItem(`cheer_user_accs_${dayKey}`);
         document.getElementById('submittedAccCount').innerText = userAccs;
 
-        // 💣 GỬI DỮ LIỆU SANG FIREBASE KHI BẤM XONG HẾT LƯỢT
-        if (typeof window.sendDataToFirebase === 'function') {
-          window.sendDataToFirebase(userAccs);
-        }
-if (typeof saveUserDataToFirebase === 'function') {
-          saveUserDataToFirebase(savedAccs);
-        }
-        setTimeout(() => {
-          showStep('done');
-        }, 500);
-      }
+// 💣 GỬI DỮ LIỆU SANG FIREBASE KHI BẤM XONG HẾT LƯỢT
+if (typeof window.sendDataToFirebase === 'function') {
+  window.sendDataToFirebase(userAccs);
+}
+if (typeof window.saveUserDataToFirebase === 'function') {
+  window.saveUserDataToFirebase(userAccs); // 👈 Đã sửa savedAccs -> userAccs
+}
+setTimeout(() => {
+  showStep('done');
+}, 500);
+   }
     }
-
     // TẠO HIỆU ỨNG HẠT BOMB BAY VỤT LÊN TRÊN
     function createFlyingParticle(x, y) {
       const p = document.createElement('img');
