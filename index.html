@@ -681,156 +681,7 @@
     padding: 6px 12px;
   }
 }
-/* GIAO DIỆN THEME SINH NHẬT JIMIN (VÀNG & TÍM PASTEL) */
-body {
-  background: linear-gradient(160deg, #fffde7 0%, #f3e8ff 55%, #fef3c7 100%) !important;
-  color: #3b0764 !important;
-  margin: 0;
-  overflow-x: hidden;
-}
 
-/* Avatar & Viền lấp lánh */
-.profile-avatar {
-  border: 3px solid #fde047 !important;
-  box-shadow: 0 0 18px rgba(250, 204, 21, 0.8), 0 0 30px rgba(192, 132, 252, 0.4) !important;
-  animation: pulseGlow 2s infinite alternate;
-}
-
-@keyframes pulseGlow {
-  0% { transform: scale(1); box-shadow: 0 0 12px rgba(250, 204, 21, 0.6); }
-  100% { transform: scale(1.03); box-shadow: 0 0 22px rgba(192, 132, 252, 0.7); }
-}
-
-.profile-title { color: #6b21a8 !important; }
-.category-title { color: #7e22ce !important; border-bottom: 2px solid #fde047 !important; }
-
-/* Nút Link */
-.link-box {
-  background: #ffffff !important;
-  border: 1px solid #e9d5ff !important;
-  color: #3b0764 !important;
-  box-shadow: 0 4px 12px rgba(192, 132, 252, 0.12);
-}
-.link-box:hover {
-  background: #fefce8 !important;
-  border-color: #c084fc !important;
-  box-shadow: 0 4px 18px rgba(250, 204, 21, 0.4) !important;
-  transform: translateY(-2px);
-}
-
-/* POPUP WELCOME SINH NHẬT */
-.jimin-popup-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(5px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10000;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-}
-
-.jimin-popup-card {
-  background: linear-gradient(135deg, #fffde7 0%, #f3e8ff 100%);
-  border: 2px solid #fde047;
-  border-radius: 20px;
-  padding: 24px 20px;
-  text-align: center;
-  max-width: 320px;
-  width: 85%;
-  box-shadow: 0 10px 30px rgba(192, 132, 252, 0.4);
-  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.7); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.jimin-popup-icon { font-size: 38px; margin-bottom: 8px; }
-.jimin-popup-card h3 { color: #6b21a8; margin: 0 0 10px 0; font-size: 20px; font-weight: 700; }
-.jimin-popup-card p { color: #4b5563; font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
-
-.jimin-popup-btn {
-  background: linear-gradient(135deg, #fde047 0%, #c084fc 100%);
-  color: #3b0764;
-  border: none;
-  padding: 10px 24px;
-  border-radius: 25px;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.4);
-  transition: transform 0.2s;
-}
-.jimin-popup-btn:hover { transform: scale(1.05); }
-
-/* HIỆU ỨNG RƠI & MỜ DẦN NƯỚC/TUYẾT TAN */
-@keyframes jiminRainFade {
-  0% {
-    transform: translateY(-30px) rotate(0deg);
-    opacity: 1;
-  }
-  60% {
-    opacity: 0.9;
-  }
-  100% {
-    transform: translateY(102vh) rotate(360deg);
-    opacity: 0; /* Mờ dần hoàn toàn khi xuống đáy */
-  }
-}
-
-.jimin-flake {
-  position: fixed;
-  top: 0;
-  pointer-events: none;
-  z-index: 9999;
-  animation-name: jiminRainFade;
-  animation-timing-function: linear;
-  animation-fill-mode: forwards;
-}
-/* --- 1. Khung chứa Logo & Sticker --- */
-.logo-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-/* --- 2. Vị trí & Kích thước Chimmy --- */
-.logo-sticker {
-  position: absolute;
-  top: -20px;       /* Căn độ cao: số càng âm càng nhích lên cao */
-  right: -5px;      /* Căn vị trí: số càng âm càng dịch sang phải */
-  width: 52px;      /* Độ lớn sticker Chimmy */
-  height: auto;
-  z-index: 10;
-  pointer-events: none; /* Tránh che mất lượt click vào logo */
-  transform-style: preserve-3d;
-}
-
-/* --- 3. Hiệu ứng 3D Đung Đưa + Nhún Nhảy --- */
-.chimmy-3d-bounce {
-  animation: chimmy3DBounce 2.2s infinite ease-in-out;
-}
-
-@keyframes chimmy3DBounce {
-  0%, 100% {
-    transform: perspective(400px) rotateY(0deg) rotateZ(0deg) translateY(0) scale(1);
-  }
-  25% {
-    /* Nghiêng 3D sang trái + nảy lên trên + phình to nhẹ */
-    transform: perspective(400px) rotateY(-18deg) rotateZ(-10deg) translateY(-10px) scale(1.1);
-  }
-  50% {
-    /* Tiếp đất nhẹ */
-    transform: perspective(400px) rotateY(0deg) rotateZ(0deg) translateY(-2px) scale(1);
-  }
-  75% {
-    /* Nghiêng 3D sang phải + nảy lên trên + phình to nhẹ */
-    transform: perspective(400px) rotateY(20deg) rotateZ(12deg) translateY(-10px) scale(1.1);
-  }
-}
 /* ============================================================ */
 /* 📱 TÙY CHỈNH GIAO DIỆN RIÊNG CHO ĐIỆN THOẠI */
 /* ============================================================ */
@@ -869,15 +720,7 @@ body {
   </style>
 </head>
 <body>
-  <!-- POPUP WELCOME SINH NHẬT JIMIN -->
-<div id="jiminPopupOverlay" class="jimin-popup-overlay">
-  <div class="jimin-popup-card">
-    <div class="jimin-popup-icon">🐣💛✨</div>
-    <h3>HAPPY JIMIN DAY! 🎂</h3>
-    <p>Chúc MIMI của chúng ta luôn bình an, hạnh phúc và tỏa sáng rực rỡ 💜✨</p>
-    <button id="jiminCloseBtn" onclick="closeJiminPopup()" class="jimin-popup-btn">STREAM ✨</button>
-  </div>
-</div>
+
 <!-- Thẻ hiển thị lượt truy cập -->
 <div class="visitor-badge">
   ĐÃ CÓ <span id="visitor-count" style="color: #7000f9;">...</span> NGƯỜI GHÉ CHƠI
@@ -893,10 +736,7 @@ body {
     </div>
   </div>
 
-    <div class="logo-wrapper">
-  <img src="logo.png" class="profile-img" alt="logo">
-  <img src="chimmy.png" alt="Chimmy Sticker" class="logo-sticker chimmy-3d-bounce">
-</div>
+    <img src="logo.png" class="profile-img" alt="logo">
     
     <div class="top-title">NHỮNG CON BOT ĐAU LƯNG</div>
     <h1>SUPPORT ONLY FOR BTS</h1>
@@ -1188,7 +1028,7 @@ window.getCheerDayKey = getCheerDayKey;
         const userAccs = localStorage.getItem(`cheer_user_accs_${dayKey}`);
         document.getElementById('submittedAccCount').innerText = userAccs;
 
-// 💣 GỬI DỮ LIỆU SANG FIREBASE KHI BẤM XONG HẾT LƯỢT
+        // 💣 GỬI DỮ LIỆU SANG FIREBASE KHI BẤM XONG HẾT LƯỢT
 if (typeof window.sendDataToFirebase === 'function') {
   window.sendDataToFirebase(userAccs);
 }
@@ -1199,7 +1039,8 @@ setTimeout(() => {
   showStep('done');
 }, 500);
    }
-    }
+    } 
+
     // TẠO HIỆU ỨNG HẠT BOMB BAY VỤT LÊN TRÊN
     function createFlyingParticle(x, y) {
       const p = document.createElement('img');
@@ -1736,28 +1577,7 @@ function getOrCreateUserSyncCode() {
 
   return { userCode, userNick };
 }
-// Hàm tự động lưu mã cá nhân lên Firebase ngay khi mở trang
-async function initUserOnFirebase() {
-  const { userCode, userNick } = getOrCreateUserSyncCode();
-  const totalAccs = parseInt(localStorage.getItem('user_total_accs') || '0');
-  
-  try {
-    const userRef = ref(db, `users/${userCode}`);
-    const snapshot = await get(userRef);
-    
-    // Nếu mã này chưa có trên Firebase thì tạo mới ngay lập tức
-    if (!snapshot.exists()) {
-      await set(userRef, {
-        nickname: userNick,
-        totalAccs: totalAccs,
-        createdTime: new Date().toISOString()
-      });
-      console.log(`✅ Đã tự động khởi tạo mã ${userCode} lên Firebase!`);
-    }
-  } catch (e) {
-    console.error("Lỗi khởi tạo user trên Firebase:", e);
-  }
-}
+
 // Hiển thị thông tin người dùng & Tổng số acc tích lũy ra Pop-up
 function updateUIUserInfo() {
   const { userCode, userNick } = getOrCreateUserSyncCode();
@@ -1881,13 +1701,10 @@ async function saveUserDataToFirebase(addedAccs) {
 // Chạy tự động khi tải xong trang web
 document.addEventListener('DOMContentLoaded', () => {
   updateUIUserInfo();
-  initUserOnFirebase();
-  updateVisitorCount();       // 👈 Chạy bộ đếm lượt truy cập
-  listenToTodayCheerTotal();  // 👈 Đồng bộ Cheer Bomb toàn web
-
-  // Gán hàm ra phạm vi toàn cục (window) để HTML gọi được
-  window.updateUIUserInfo = updateUIUserInfo;
-  window.saveUserDataToFirebase = saveUserDataToFirebase;
+  updateVisitorCount();       // 👈 Thêm dòng này để chạy bộ đếm
+  listenToTodayCheerTotal();  // 👈 Thêm dòng này để đồng bộ Cheer Bomb toàn web
+window.updateUIUserInfo = updateUIUserInfo;
+window.saveUserDataToFirebase = saveUserDataToFirebase;
 });
 
 // Hàm đếm lượt truy cập CHUẨN REALTIME
@@ -1916,63 +1733,6 @@ async function updateVisitorCount() {
     console.error("Lỗi đếm lượt truy cập:", err);
   }
 }
-// 1. ĐÓNG POPUP WELCOME
-function closeJiminPopup() {
-  const overlay = document.getElementById('jiminPopupOverlay');
-  if (overlay) {
-    overlay.style.opacity = '0';
-    setTimeout(() => overlay.remove(), 300);
-  }
-}
-
-// 2. HIỆU ỨNG MƯA ICON (🐣 💛 ✨ 💜 🎂) RƠI MỜ DẦN
-function startJiminRainEffect() {
-  const symbols = ['🐣', '💛', '✨', '💜', '🎂'];
-  
-  setInterval(() => {
-    const flake = document.createElement('div');
-    flake.className = 'jimin-flake';
-    flake.innerText = symbols[Math.floor(Math.random() * symbols.length)];
-    
-    // Tùy chỉnh vị trí xuất hiện ngẫu nhiên theo chiều ngang
-    flake.style.left = Math.random() * 98 + 'vw';
-    
-    // Kích thước ngẫu nhiên (14px - 26px)
-    const size = Math.random() * 12 + 14;
-    flake.style.fontSize = size + 'px';
-    
-    // Thời gian rơi ngẫu nhiên (3.5s - 6.5s) tạo độ sinh động
-    const duration = Math.random() * 3 + 3.5;
-    flake.style.animationDuration = duration + 's';
-    
-    document.body.appendChild(flake);
-
-    // Tự động dọn dẹp thẻ div sau khi rơi xong
-    setTimeout(() => {
-      flake.remove();
-    }, duration * 1000);
-  }, 280); // Tốc độ tạo icon rơi
-}
-
-// ĐÓNG POPUP (Gán vào window để đảm bảo gọi từ đâu cũng chạy)
-window.closeJiminPopup = function() {
-  const overlay = document.getElementById('jiminPopupOverlay');
-  if (overlay) {
-    overlay.style.opacity = '0';
-    setTimeout(() => overlay.remove(), 300);
-  }
-};
-
-// KÍCH HOẠT HIỆU ỨNG KHI TRANG TẢI XONG
-document.addEventListener('DOMContentLoaded', () => {
-  const closeBtn = document.getElementById('jiminCloseBtn');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', window.closeJiminPopup);
-  }
-
-  // Chạy hiệu ứng mưa icon
-  startJiminRainEffect();
-});
 </script>
 </body>
 </html>
