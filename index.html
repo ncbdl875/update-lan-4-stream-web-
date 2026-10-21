@@ -12,7 +12,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ncbotdl875.stream/">
   <meta property="og:title" content="NHỮNG CON BOT ĐAU LƯNG • SUPPORT ONLY BTS">
-  <meta property="og:description" content="Trang web cập nhật và hỗ trợ stream nhạc số cho BTS đa nền tảng, do NCBDL team host.">
+  <meta property="og:descr
+  iption" content="Trang web cập nhật và hỗ trợ stream nhạc số cho BTS đa nền tảng, do NCBDL team host.">
   <meta property="og:image" content="https://ncbotdl875.stream/logo.png">
 
   <!-- ============================================================ -->
@@ -717,6 +718,43 @@
     right: 9px;
   }
 }
+/* K. BẢNG POP-UP APP TẠO MIXTAPE */
+    .mixtape-modal-content {
+      background: #f09eff72; /* Tông màu tối để đồng bộ với dark mode của web Mixtape */
+      border: 1.5px solid rgba(112, 0, 249, 0.6);
+      padding: 40px 10px 10px 10px; /* Chừa khoảng trống phía trên cho nút Tắt */
+      border-radius: 24px;
+      max-width: 800px;
+      width: 95%;
+      height: 85vh; /* Chiều cao chiếm 85% màn hình */
+      position: relative;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+      animation: popUpAnim 0.25s ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+    .mixtape-iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      background: #030008;
+    }
+    .close-btn-mixtape {
+      position: absolute;
+      top: 5px; 
+      right: 20px;
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #bb86fc;
+      transition: transform 0.2s, color 0.2s;
+      z-index: 10;
+    }
+    .close-btn-mixtape:hover { 
+      transform: scale(1.15); 
+      color: #ffffff; 
+    }
   </style>
 </head>
 <body>
@@ -741,7 +779,12 @@
     <div class="top-title">NHỮNG CON BOT ĐAU LƯNG</div>
     <h1>SUPPORT ONLY FOR BTS</h1>
     <p class="subtitle">UPDATE CÁC HOẠT ĐỘNG SUPPORT NHẠC SỐ CHO BTS ĐA NỀN TẢNG</p>
-
+    <!-- NÚT MỞ APP TẠO MIXTAPE -->
+    <div class="category-title">🎧 TẠO PLAYLIST TỰ ĐỘNG</div>
+    <div class="link-box" onclick="openMixtape()" style="background: rgba(112, 0, 249, 0.15); border-color: #7000f9;">
+  <span>💜 Tạo Playlist Spotify</span>
+  <span class="btn-action btn-guide">MỞ APP</span>
+</div>
     <!-- Nơi đổ dữ liệu tự động từ Google Sheet (Link stream & Tour Box) -->
     <div id="links-container">
       <p id="loading">⏳ CHỜ XÍU...</p>
@@ -898,7 +941,20 @@
 
     </div>
   </div>
-
+<!-- BẢNG POP-UP ỨNG DỤNG TẠO MIXTAPE -->
+  <div id="mixtapeModal" class="modal-overlay">
+    <div class="mixtape-modal-content">
+      <!-- Nút tắt Box -->
+      <span class="close-btn-mixtape" onclick="closeMixtape()">&times;</span>
+      
+      <!-- Nhúng link web mixtape vào Iframe -->
+      <iframe 
+        src="https://bts-playlist-maker.vercel.app" 
+        class="mixtape-iframe"
+        allow="clipboard-write">
+      </iframe>
+    </div>
+  </div>
   <!-- ============================================================
        ⚙️ 3. KHU VỰC XỬ LÝ DỮ LIỆU GOOGLE SHEET (JAVASCRIPT)
        ============================================================ -->
@@ -1311,13 +1367,15 @@ setTimeout(() => {
       document.getElementById('guideModal').style.display = 'none';
     }
 
-    window.onclick = function(event) {
+     window.onclick = function(event) {
       let guideModal = document.getElementById('guideModal');
       let cheerModal = document.getElementById('cheerModal');
+      let mixtapeModal = document.getElementById('mixtapeModal'); // Thêm dòng này
+      
       if (event.target == guideModal) { guideModal.style.display = "none"; }
       if (event.target == cheerModal) { cheerModal.style.display = "none"; }
+      if (event.target == mixtapeModal) { mixtapeModal.style.display = "none"; } // Thêm dòng này
     }
-
     // Khởi chạy ứng dụng
     updateFloatingBadge();
     fetchLinksFromSheet();
@@ -1733,6 +1791,44 @@ async function updateVisitorCount() {
     console.error("Lỗi đếm lượt truy cập:", err);
   }
 }
+function openMixtape() {
+  document.getElementById('mixtapeModal').style.display = 'flex';
+}
+function closeMixtape() {
+  document.getElementById('mixtapeModal').style.display = 'none';
+}
+
+</script>
+<script>
+  // Khai báo hàm trực tiếp vào window để nút bấm HTML luôn tìm thấy
+  window.openMixtape = function() {
+    document.getElementById('mixtapeModal').style.display = 'flex';
+  };
+  
+  window.closeMixtape = function() {
+    document.getElementById('mixtapeModal').style.display = 'none';
+  };
+
+  // Đóng Box khi người dùng bấm ra ngoài viền đen
+  window.addEventListener('click', function(event) {
+    let mixtapeModal = document.getElementById('mixtapeModal');
+    if (event.target == mixtapeModal) {
+      mixtapeModal.style.display = "none";
+    }
+  });
+</script>
+<script>
+<!-- BẢNG POP-UP ỨNG DỤNG TẠO MIXTAPE -->
+<div id="mixtapeModal" class="modal-overlay">
+  <div class="mixtape-modal-content">
+    <span class="close-btn-mixtape" onclick="closeMixtape()">&times;</span>
+    <iframe 
+      src="https://bts-playlist-maker.vercel.app/" 
+      class="mixtape-iframe"
+      allow="clipboard-write">
+    </iframe>
+  </div>
+</div>
 </script>
 </body>
 </html>
