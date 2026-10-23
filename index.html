@@ -733,6 +733,46 @@
       display: flex;
       flex-direction: column;
     }
+    /* ARMY gate: chỉ hiển thị trước khi tải iframe playlist */
+    .mixtape-gate {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #f3e8ff, #e9d5ff);
+      color: #6b21a8;
+      padding: 26px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      text-align: center;
+    }
+    .mixtape-gate h3 { margin: 0; font-size: clamp(20px, 5vw, 27px); }
+    .mixtape-gate p { margin: 0; line-height: 1.6; }
+    .mixtape-gate input {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 360px;
+      padding: 14px 16px;
+      border: 2px solid #d8b4fe;
+      border-radius: 14px;
+      background: #fff;
+      color: #581c87;
+      font-size: 17px;
+      text-align: center;
+    }
+    .mixtape-gate button {
+      border: 0;
+      border-radius: 999px;
+      background: #7000f9;
+      color: white;
+      font-weight: 800;
+      padding: 13px 32px;
+      cursor: pointer;
+    }
+    .mixtape-gate-error { min-height: 1.5em; color: #a21caf; font-weight: 700; }
     .mixtape-iframe {
       flex: 1;
       width: 100%;
@@ -947,11 +987,23 @@
       <!-- Nút tắt Box -->
       <span class="close-btn-mixtape" onclick="closeMixtape()">&times;</span>
       
-      <!-- Nhúng link web mixtape vào Iframe -->
-      <iframe 
-        src="https://bts-playlist-maker.vercel.app" 
+      <!-- Câu hỏi ARMY xuất hiện trước iframe -->
+      <form id="mixtapeGate" class="mixtape-gate" onsubmit="return verifyMixtapeAnswer(event)">
+        <h3>🔐 CHỈ TẠO PLL KHI THẬT SỰ CẦN VÀ HIỂU METHOD</h3>
+        <p>Dựa theo method stream Spotify fandom đang dùng, bài focus trong playlist là SWIM và SWIM có 6 ver. Vậy add đủ ver SWIM vào playlist sẽ là bao nhiêu lần?</p>
+        <p><strong>Chỉ điền số — Gợi ý: XXX</strong></p>
+        <input id="mixtapeAnswer" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="Nhập đáp án..." aria-label="Đáp án xác minh ARMY" required>
+        <div id="mixtapeGateError" class="mixtape-gate-error" role="status" aria-live="polite"></div>
+        <button type="submit">XÁC NHẬN 💜</button>
+      </form>
+      <!-- Không tải ứng dụng trước khi trả lời đúng -->
+      <iframe
+        id="mixtapeAppFrame"
+        data-src="https://bts-playlist-maker.vercel.app"
         class="mixtape-iframe"
-        allow="clipboard-write">
+        title="NCBOTDL875 Spotify Playlist Maker"
+        allow="clipboard-write"
+        style="display:none">
       </iframe>
     </div>
   </div>
@@ -1791,44 +1843,28 @@ async function updateVisitorCount() {
     console.error("Lỗi đếm lượt truy cập:", err);
   }
 }
-function openMixtape() {
+// Hàm hiển thị popup, giữ nguyên giao diện xác minh mỗi lần mở.
+window.openMixtape = function() {
   document.getElementById('mixtapeModal').style.display = 'flex';
-}
-function closeMixtape() {
+};
+window.closeMixtape = function() {
   document.getElementById('mixtapeModal').style.display = 'none';
-}
-
-</script>
-<script>
-  // Khai báo hàm trực tiếp vào window để nút bấm HTML luôn tìm thấy
-  window.openMixtape = function() {
-    document.getElementById('mixtapeModal').style.display = 'flex';
-  };
-  
-  window.closeMixtape = function() {
-    document.getElementById('mixtapeModal').style.display = 'none';
-  };
-
-  // Đóng Box khi người dùng bấm ra ngoài viền đen
-  window.addEventListener('click', function(event) {
-    let mixtapeModal = document.getElementById('mixtapeModal');
-    if (event.target == mixtapeModal) {
-      mixtapeModal.style.display = "none";
-    }
-  });
-</script>
-<script>
-<!-- BẢNG POP-UP ỨNG DỤNG TẠO MIXTAPE -->
-<div id="mixtapeModal" class="modal-overlay">
-  <div class="mixtape-modal-content">
-    <span class="close-btn-mixtape" onclick="closeMixtape()">&times;</span>
-    <iframe 
-      src="https://bts-playlist-maker.vercel.app/" 
-      class="mixtape-iframe"
-      allow="clipboard-write">
-    </iframe>
-  </div>
-</div>
+};
+window.verifyMixtapeAnswer = function(event) {
+  event.preventDefault();
+  const answer = document.getElementById('mixtapeAnswer').value.trim();
+  const error = document.getElementById('mixtapeGateError');
+  if (answer !== '120') {
+    error.textContent = 'SAI MẬT KHẨU';
+    return false;
+  }
+  error.textContent = '';
+  document.getElementById('mixtapeGate').style.display = 'none';
+  const frame = document.getElementById('mixtapeAppFrame');
+  frame.style.display = 'block';
+  if (!frame.src) frame.src = frame.dataset.src;
+  return false;
+};
 </script>
 </body>
 </html>
